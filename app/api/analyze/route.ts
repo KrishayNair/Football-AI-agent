@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 
-// Max 10MB - increase this if needed but be mindful of API limits
-const MAX_VIDEO_SIZE = 10 * 1024 * 1024; // 10MB
+// Remove this unused variable since we're not checking file size anymore
+// when receiving just a frame instead of the whole video
+// const MAX_VIDEO_SIZE = 10 * 1024 * 1024; // 10MB
 
 export async function POST(request: NextRequest) {
   try {
@@ -58,11 +59,11 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Set larger body size limit for this route
+// Set a reasonable size limit for large base64 encoded frames
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: '15mb', // Slightly larger than MAX_VIDEO_SIZE to account for form data overhead
+      sizeLimit: '5mb', // Reduced from 15mb since we're only handling frames now
     },
   },
 }; 

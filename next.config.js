@@ -2,8 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    serverComponentsExternalPackages: ['sharp', 'canvas'],
+    // Remove the deprecated option
+    // serverComponentsExternalPackages: ['sharp', 'canvas'],
   },
+  // Use the new location for external packages
+  serverExternalPackages: ['sharp', 'canvas'],
 }
 
 module.exports = {
